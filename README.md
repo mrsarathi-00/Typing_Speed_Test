@@ -14,5 +14,4 @@ A simple console-based Java application that allows users to test their typing s
 
 ---
 
-## 📁 Project Structure
 
