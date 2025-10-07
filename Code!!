@@ -20,10 +20,10 @@ public class TypingSpeedTest {
         String userInput = scanner.nextLine();
 
         long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
+        long timetaken = endTime - startTime;
 
         int wordCount = sentence.split(" ").length;
-        double seconds = elapsedTime / 1000.0;
+        double seconds = timetaken / 1000.0;
         double wpm = (userInput.equals(sentence)) ? (wordCount / (seconds / 60)) : 0;
 
         System.out.println("\n⏱️ Time taken: " + seconds + " seconds");
