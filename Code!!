@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class TypingSpeedTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String sentence = "The quick brown fox jumps over the lazy dog";
+
+        System.out.println("📘 Typing Speed Test");
+        System.out.println("------------------------");
+        System.out.println("Type the following sentence as fast as you can:");
+        System.out.println("\n📜 \"" + sentence + "\"\n");
+
+        System.out.println("⏳ Press Enter when you're ready...");
+        scanner.nextLine();
+
+        long startTime = System.currentTimeMillis();
+
+        System.out.print("▶️ Start typing: ");
+        String userInput = scanner.nextLine();
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+
+        int wordCount = sentence.split(" ").length;
+        double seconds = elapsedTime / 1000.0;
+        double wpm = (userInput.equals(sentence)) ? (wordCount / (seconds / 60)) : 0;
+
+        System.out.println("\n⏱️ Time taken: " + seconds + " seconds");
+
+        if (userInput.equals(sentence)) {
+            System.out.printf("✅ Great! Your typing speed is: %.2f WPM\n", wpm);
+        } else {
+            System.out.println("❌ The sentence you typed does not match.");
+            System.out.println("👉 Expected: " + sentence);
+            System.out.println("👉 You typed: " + userInput);
+        }
+
+        scanner.close();
+    }
+}
