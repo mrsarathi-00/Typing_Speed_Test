@@ -1,41 +1,37 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class TypingSpeedTest {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        String sentence = "The quick brown fox jumps over the lazy dog";
-
-        System.out.println("📘 Typing Speed Test");
-        System.out.println("------------------------");
+public class Main {
+    public static void main(String[] args){
+        Scanner scan=new Scanner (System.in);
+        System.out.println("Enter the Sentence..!!");
+        String sentence=scan.nextLine();
+        System.out.println();
+        System.out.println("Typing speed Test");
+        System.out.println("_______________________________________________");
+        System.out.println();
         System.out.println("Type the following sentence as fast as you can:");
-        System.out.println("\n📜 \"" + sentence + "\"\n");
+        System.out.println("\n" + sentence + "\n");
+        System.out.println(" Press Enter when you're ready...");
+        scan.nextLine();
 
-        System.out.println("⏳ Press Enter when you're ready...");
-        scanner.nextLine();
+        long start_time=System.currentTimeMillis();
+        System.out.println("Start Typing..");
+        String userInput = scan.nextLine();
 
-        long startTime = System.currentTimeMillis();
+        long end_time=System.currentTimeMillis();
+        long total_time_taken=end_time-start_time;
 
-        System.out.print("▶️ Start typing: ");
-        String userInput = scanner.nextLine();
-
-        long endTime = System.currentTimeMillis();
-        long timetaken = endTime - startTime;
-
-        int wordCount = sentence.split(" ").length;
-        double seconds = timetaken / 1000.0;
-        double wpm = (userInput.equals(sentence)) ? (wordCount / (seconds / 60)) : 0;
-
-        System.out.println("\n⏱️ Time taken: " + seconds + " seconds");
-
+        int words=sentence.split(" ").length;
+        double sec=total_time_taken/1000.0;
+        double wpm=(userInput.equals(sentence)) ? (words / (sec / 60)) : 0;
+        System.out.println("\n Time Taken: "+sec+" seconds.");
         if (userInput.equals(sentence)) {
-            System.out.printf("✅ Great! Your typing speed is: %.2f WPM\n", wpm);
+            System.out.printf(" Great! Your typing speed is: %.2f WPM\n", wpm);
         } else {
-            System.out.println("❌ The sentence you typed does not match.");
-            System.out.println("👉 Expected: " + sentence);
-            System.out.println("👉 You typed: " + userInput);
+            System.out.println("OOPS!! The sentence you typed does not match.");
+            System.out.println();
+            System.out.println("Expected: " + sentence);
+            System.out.println("You typed: " + userInput);
         }
-
-        scanner.close();
     }
 }
