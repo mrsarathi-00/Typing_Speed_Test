@@ -11,7 +11,6 @@ A simple console-based Java application that allows users to test their typing s
 - Measures time taken in **seconds**
 - Calculates typing speed in **WPM (Words Per Minute)**
 - Checks for **accuracy** (exact match required)
-
 ---
 
 
