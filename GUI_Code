@@ -1,0 +1,88 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class speedtype {
+
+    private static long startTime = 0;
+    private static boolean timerStarted = false;
+
+    public static void main(String[] args) {
+        launchApp();
+    }
+
+    private static void launchApp() {
+
+        startTime = 0;
+        timerStarted = false;
+
+        String sentence = JOptionPane.showInputDialog(null, "Enter the sentence for the typing test:");
+
+        if (sentence == null || sentence.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No sentence entered. Exiting.");
+            return;
+        }
+
+        JFrame frame = new JFrame("Typing Speed Test");
+        frame.setSize(650, 350);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextArea sentenceArea = new JTextArea(sentence);
+        sentenceArea.setLineWrap(true);
+        sentenceArea.setWrapStyleWord(true);
+        sentenceArea.setEditable(false);
+        sentenceArea.setFont(new Font("Arial", Font.PLAIN, 18));
+
+        JTextArea inputArea = new JTextArea(8, 40);
+        inputArea.setLineWrap(true);
+        inputArea.setWrapStyleWord(true);
+        inputArea.setFont(new Font("Arial", Font.PLAIN, 18));
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.add(new JScrollPane(inputArea));
+
+        JLabel resultLabel = new JLabel("Start typing when you're ready...");
+        resultLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
+        JButton restartBtn = new JButton("Restart");
+
+        restartBtn.addActionListener(e -> {
+            frame.dispose();
+            launchApp();
+        });
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(resultLabel, BorderLayout.CENTER);
+        bottomPanel.add(restartBtn, BorderLayout.EAST);
+
+        frame.setLayout(new BorderLayout());
+        frame.add(new JScrollPane(sentenceArea), BorderLayout.NORTH);
+        frame.add(centerPanel, BorderLayout.CENTER);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+
+        inputArea.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+                if (!timerStarted && inputArea.getText().length() > 0) {
+                    timerStarted = true;
+                    startTime = System.currentTimeMillis();
+                }
+
+                String userInput = inputArea.getText();
+
+                if (userInput.equals(sentence)) {
+                    long end = System.currentTimeMillis();
+                    double timeTaken = (end - startTime) / 1000.0;
+                    int words = sentence.split(" ").length;
+                    double wpm = (words / timeTaken) * 60;
+                    resultLabel.setText(String.format("Perfect! Time: %.2f sec | WPM: %.2f", timeTaken, wpm));
+                    inputArea.setEditable(false);
+                }
+            }
+        });
+
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+}
