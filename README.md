@@ -21,7 +21,7 @@ The project includes separate Java files for both implementations, giving users 
 ---
 
 ### 🖥️ GUI-Based Typing Speed Test
-- User-friendly windowed interface (**Swing / Javaawt**)
+- User-friendly windowed interface (**Swing / Java awt**)
 - Shows the sentence and text field for typing
 - Real-time timers or manual start/end triggers
 - Calculates **WPM** and **accuracy**
