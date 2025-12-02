@@ -1,8 +1,10 @@
+package typespeedtest;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class Main {
+class speedtype{
     private static long startTime = 0;
     private static boolean timerStarted = false;
 
@@ -55,7 +57,7 @@ class Main {
         });
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(resultLabel, BorderLayout.WEST);
+        bottomPanel.add(resultLabel, BorderLayout.CENTER);
         bottomPanel.add(restartBtn, BorderLayout.EAST);
 
         frame.setLayout(new BorderLayout());
@@ -70,6 +72,7 @@ class Main {
                     startTime = System.currentTimeMillis();
                     resultLabel.setText("Push Your Limit..!!");
                 }
+
                 String typed = inputArea.getText();
                 if (typed.equals(sentence)) {
                     long end = System.currentTimeMillis();
